@@ -7,29 +7,28 @@
         :id="id"
         :checked="isDone"
         @change="$emit('checkbox-changed')" />
-      <label :for="id" class="checkbox-label">{{label}}</label>
+      <label :for="id" class="checkbox-label">{{ label }}</label>
     </div>
     <div class="btn-group">
-      <button
-  type="button"
-  class="btn"
-  ref="editButton"
-  @click="toggleToItemEditForm">
-  Edit
-  <span class="visually-hidden">{{label}}</span>
-</button>
-      <button type="button" class="btn btn__danger" @click="deleteToDo">
-        Delete <span class="visually-hidden">{{label}}</span>
-      </button>
+      <!-- 使用 Element Plus 的按钮组件替换原生按钮 -->
+      <el-button
+        type="text"
+        ref="editButton"
+        @click="toggleToItemEditForm">
+        Edit <span class="visually-hidden">{{ label }}</span>
+      </el-button>
+      <el-button type="text" class="btn btn__danger" @click="deleteToDo">
+        Delete <span class="visually-hidden">{{ label }}</span>
+      </el-button>
     </div>
   </div>
   <to-do-item-edit-form
-  v-else
-  :id="id"
-  :label="label"
-  @item-edited="itemEdited"
-  @edit-cancelled="editCancelled">
-</to-do-item-edit-form>
+    v-else
+    :id="id"
+    :label="label"
+    @item-edited="itemEdited"
+    @edit-cancelled="editCancelled">
+  </to-do-item-edit-form>
 </template>
 <script>
 import ToDoItemEditForm from "./ToDoItemEditForm";
